@@ -1,0 +1,66 @@
+<html>
+    <head>
+
+        <style>
+         #socket_log {
+             padding: 1em;
+             border: 1px solid black;
+         }
+        </style>
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        Socket Log:
+        <div id="socket_log">
+            
+        </div>
+
+        <script>
+
+         $(function(){
+
+             connect();
+             function connect(){
+	               var socket;
+	               var host = "ws://localhost:8001/ws";
+                 /* var host = "ws://demos.kaazing.com/echo"; */
+                 try{
+
+                     var socket = new WebSocket(host);
+
+                     message('<p class="event">Socket Status: '+socket.readyState+'</p>');
+
+                     socket.onopen = function(){
+       		               message('<p class="event">Socket Status: '+socket.readyState+' (open)</p>');
+
+
+                         var data = {query: "Test", shipping_country: "NL"}
+                         socket.send(JSON.stringify(data));
+                     }
+
+                     socket.onmessage = function(msg){
+       		               message('<p class="message">Received: '+msg.data+'</p>');
+                     }
+
+                     socket.onclose = function(){
+       		               message('<p class="event">Socket Status: '+socket.readyState+' (Closed)</p>');
+                     }
+
+
+                 } catch(exception){
+   		               message('<p>Error'+exception+'</p>');
+                 }
+             }
+
+             function message(msg){
+	               $('#socket_log').append(msg);
+             }
+
+         });
+
+        </script>
+    </body>
+</html>

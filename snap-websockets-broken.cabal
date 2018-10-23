@@ -1,0 +1,83 @@
+Name:                snap-websockets-broken
+Version:             1.0
+Synopsis:            Project Synopsis Here
+Description:         Project Description Here
+License:             AllRightsReserved
+Author:              Qqwy
+Maintainer:          qqwy@gmx.com
+Stability:           Experimental
+Category:            Web
+Build-type:          Simple
+Cabal-version:       >=1.2
+
+Executable snap-websockets-broken
+  hs-source-dirs: src
+  main-is: Main.hs
+  other-modules:
+    OurPrelude,
+    Pipe,
+    SnapWebsocketsBroken,
+    SnapWebsocketsBroken.WebSockets,
+    SnapWebsocketsBroken.Models
+
+  extensions:
+    NoImplicitPrelude
+    ApplicativeDo
+    BangPatterns
+    ConstraintKinds
+    DataKinds
+    DefaultSignatures
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    DerivingStrategies
+    EmptyCase
+    ExistentialQuantification
+    FlexibleContexts
+    FlexibleInstances
+    FunctionalDependencies
+    GADTs
+    GeneralizedNewtypeDeriving
+    InstanceSigs
+    KindSignatures
+    LambdaCase
+    MultiParamTypeClasses
+    MultiWayIf
+    NamedFieldPuns
+    OverloadedStrings
+    PatternSynonyms
+    RankNTypes
+    ScopedTypeVariables
+    StandaloneDeriving
+    TupleSections
+    TypeApplications
+    TypeFamilies
+    TypeFamilyDependencies
+    TypeOperators
+
+  Build-depends:
+                base                      >= 4      && < 5,
+                bytestring                >= 0.9.1  && < 0.11,
+                mtl                       >= 2      && < 3,
+                snap-core                 >= 1.0    && < 1.1,
+                snap-server               >= 1.0    && < 1.2,
+                snap                      >= 1.0    && < 1.2,
+                websockets-snap           >= 0.10   && < 0.11,           
+                websockets                >= 0.11   && < 0.13,
+                text                      >=  1.2   && < 1.3,
+                aeson                     >=  1.0   && < 1.4,
+                tagsoup                   >=  0.14  && < 0.15,
+                http-streams              >=  0.8.6 && < 0.8.7,
+                protolude                 >= 0.2    && < 0.3,
+                io-streams                >= 1.5    && < 1.6,
+                blaze-builder             >= 0.4    && < 0.5,
+                scientific                >= 0.3.6  && < 0.3.7,
+                async                     >= 2.2    && < 2.3
+
+  if impl(ghc >= 6.12.0)
+    ghc-options: -threaded -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fwarn-tabs -funbox-strict-fields -O2
+                 -fno-warn-unused-do-bind
+  else
+    ghc-options: -threaded -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fwarn-tabs -funbox-strict-fields -O2

@@ -25,7 +25,7 @@
              connect();
              function connect(){
 	               var socket;
-	               var host = "ws://localhost:8001/ws";
+	               var host = "ws://"+window.location.host+"/ws";
                  /* var host = "ws://demos.kaazing.com/echo"; */
                  try{
 

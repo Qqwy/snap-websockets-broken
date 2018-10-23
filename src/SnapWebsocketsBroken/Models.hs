@@ -14,7 +14,7 @@ data SearchRequest =
   deriving (Eq, Show, Generic, FromJSON)
 
 data ExampleProduct = ExampleProduct
- {name :: Text
+ {name :: Maybe Text
  , price :: Scientific
  }
   deriving (Eq, Show, Generic, ToJSON)

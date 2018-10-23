@@ -2,6 +2,7 @@ module SnapWebsocketsBroken.WebSockets (handler) where
 
 import OurPrelude hiding (product)
 
+
 import Data.String (String) -- Only used for internal parsing error messages!
 
 import qualified Data.Aeson
@@ -17,6 +18,7 @@ import qualified Control.Concurrent.Async as Async
 import Data.Void (Void)
 
 import SnapWebsocketsBroken.Models (SearchRequest(..), SearchResponse(..), ExampleProduct(..))
+import qualified SnapWebsocketsBroken.ExampleFetcher
 
 handler :: Snap ()
 handler = Network.WebSockets.Snap.runWebSocketsSnap $ \pendingConn -> do
@@ -94,16 +96,4 @@ fetchAllProductsAsync_ search_request action =
 
 productFetchers :: [(Text, SearchRequest -> IO [ExampleProduct])]
 productFetchers =
-  [("ExampleFetcher", exampleFetch)]
-
-exampleFetch :: SearchRequest -> IO [ExampleProduct]
-exampleFetch _= do
-  let res = [ ExampleProduct {name = "Test42", price= 10}
-            , ExampleProduct {name = "Test2", price= 11}
-            , ExampleProduct {name = "Test3", price= 12}
-            , ExampleProduct {name = "Test4", price= 13}
-            , ExampleProduct {name = "Test5", price= 14}
-            , ExampleProduct {name = "Test6", price= 15}
-            ]
-  putText $ show res
-  return res
+  [("ExampleFetcher", SnapWebsocketsBroken.ExampleFetcher.exampleFetch)]
